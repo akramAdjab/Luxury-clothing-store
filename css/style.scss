@@ -1,0 +1,216 @@
+// VARIABLES
+$color-grey: #212529;
+$color-grey-light: #343a40;
+
+$color-bg: #f8f9fa;
+
+// MIXIN
+@mixin borderDir($direction) {
+  @if $direction==bottom {
+    border-bottom: 1px solid $color-grey;
+  }
+
+  @if $direction==right {
+    border-right: 1px solid $color-grey;
+  }
+
+  @if $direction==top {
+    border-top: 1px solid $color-grey;
+  }
+}
+
+// FIXING
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  color: $color-grey;
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  box-sizing: border-box;
+  background-color: $color-bg;
+
+  display: grid;
+  grid-template-rows: 1fr 6fr 1fr;
+}
+
+// REUSEBLE CODE
+.heading-primary {
+  font-family: "Playfair Display", serif;
+  font-size: 9rem;
+  writing-mode: vertical-lr;
+
+  display: inline-block;
+}
+
+.heading-secondary {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+// GENERAL CODE
+// HEADER
+.header {
+  @include borderDir(bottom);
+
+  padding: 0 6rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  &__logo {
+    text-align: center;
+
+    grid-column: 2/3;
+  }
+
+  &__nav {
+    justify-self: end;
+
+    &-item {
+      color: $color-grey;
+      font-size: 2.8rem;
+    }
+  }
+}
+
+// HERO SECTION
+.hero {
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+
+  &__box:not(:last-child) {
+    @include borderDir(right);
+  }
+
+  &__title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__img-box {
+    background-image: url("../img/hero-img.jpeg");
+    background-size: cover;
+  }
+
+  &__shop-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &__btn {
+    width: 100%;
+    height: 35%;
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    &-primary {
+      color: $color-grey;
+      padding: 6rem 8rem;
+      font-size: 2.4rem;
+      text-decoration: none;
+
+      display: inline-block;
+      position: relative;
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: url("../img/trait-site-ben.svg");
+        background-position: center;
+        background-size: cover;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+      }
+    }
+  }
+
+  &__img--absolute {
+    width: 110%;
+    height: 40%;
+    border: 1px solid $color-grey;
+    border-right: none;
+    background-image: url("../img/cover-img.jpg");
+    background-position: center;
+    background-size: cover;
+
+    position: absolute;
+    top: 5%;
+    right: 0;
+  }
+}
+
+// FOOTER
+.footer {
+  @include borderDir(top);
+
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+
+  & div:not(:last-child) {
+    @include borderDir(right);
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &-link {
+      color: $color-grey;
+      font-size: 2rem;
+      text-decoration: none;
+    }
+  }
+
+  &__copyright {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+
+    &-text {
+      font-size: 1.6rem;
+
+      &::before {
+        content: "";
+        width: 1.6rem;
+        height: 1.6rem;
+        margin-right: 3rem;
+        border-radius: 50%;
+        background-color: $color-grey;
+
+        display: block;
+        position: absolute;
+        top: 40%;
+        bottom: 50%;
+        left: 5%;
+      }
+    }
+  }
+}
